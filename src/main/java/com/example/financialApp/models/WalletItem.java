@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.example.financialApp.model.enums.WalletItemType;
+import com.example.financialApp.models.enums.WalletItemType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -30,8 +30,8 @@ public class WalletItem implements Serializable {
 	private Double value;
 	
 	@JsonIgnore
-	@JoinColumn(name = "wallet_id", referencedColumnName = "id")
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "wallet_id", referencedColumnName = "id")
 	private Wallet wallet;
 	
 	

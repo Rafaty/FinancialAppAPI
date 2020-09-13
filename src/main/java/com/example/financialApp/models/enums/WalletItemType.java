@@ -1,4 +1,4 @@
-package com.example.financialApp.model.enums;
+package com.example.financialApp.models.enums;
 
 public enum WalletItemType {
 	

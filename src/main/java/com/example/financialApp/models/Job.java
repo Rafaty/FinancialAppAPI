@@ -3,6 +3,7 @@ package com.example.financialApp.models;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "jobs")
@@ -30,23 +36,38 @@ public class Job implements Serializable {
 	@JoinColumn(name = "wallet_id", referencedColumnName = "id")
 	private Wallet wallet;
 
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
 	private Date initialDate;
 
+
+	@Future
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
 	private Date finalDate;
 
+	
+	@Column(nullable = false)
 	private Double budget;
+
+	@NotEmpty
+	@Size(max = 300)
+	@Column(nullable = false, length = 300)
+	private String description;
 
 	public Job() {
 
 	}
 
-	public Job(Long id, Client client, Date initialDate, Date finalDate, Double budget) {
+	public Job(Long id, String description, Client client, Date initialDate, Date finalDate, Double budget, Wallet wallet) {
 		super();
 		this.id = id;
+		this.description = description;
 		this.client = client;
 		this.initialDate = initialDate;
 		this.finalDate = finalDate;
 		this.budget = budget;
+		this.wallet = wallet;
 	}
 
 	public Long getId() {
@@ -91,6 +112,14 @@ public class Job implements Serializable {
 
 	public Wallet getWallet() {
 		return wallet;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public void setWallet(Wallet wallet) {

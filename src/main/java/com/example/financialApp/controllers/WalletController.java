@@ -29,14 +29,14 @@ public class WalletController {
 
 	}
 
-	@PostMapping(path = "/create")
+	@PostMapping("/create")
 	public ResponseEntity<Wallet> create(@RequestBody Wallet obj) {
 		obj = service.insert(obj);
 		return ResponseEntity.status(HttpStatus.CREATED).body(obj);
 
 	}
 
-	@GetMapping(path = "/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Wallet>> findById(@PathVariable Long id) {
 		return ResponseEntity.ok().body(service.findById(id));
 

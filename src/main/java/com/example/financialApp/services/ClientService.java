@@ -30,4 +30,8 @@ public class ClientService {
 		return repository.save(obj);
 	}
 
+	public Integer getNumberOfClients() {
+		return repository.getNumberOfClients();
+	}
+	
 }
